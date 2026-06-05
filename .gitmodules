@@ -1,0 +1,6 @@
+[submodule ".trae/skills/superpowers"]
+	path = .trae/skills/superpowers
+	url = https://github.com/obra/superpowers
+[submodule ".trae/skills/ui-ux-pro-max-skill"]
+	path = .trae/skills/ui-ux-pro-max-skill
+	url = https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
