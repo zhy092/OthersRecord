@@ -7,3 +7,6 @@
 [submodule ".trae/skills/planning-with-files"]
 	path = .trae/skills/planning-with-files
 	url = https://github.com/OthmanAdi/planning-with-files
+[submodule "hermes-config/skills/planning-with-files"]
+	path = hermes-config/skills/planning-with-files
+	url = https://github.com/OthmanAdi/planning-with-files
