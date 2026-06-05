@@ -1,0 +1,13 @@
+{
+  "sync-keymapping.enabledResources": {
+    "keybindings": false,
+    "mcp": true,
+    "skills": true,
+    "agents": false
+  },
+  "sync-keymapping.enabledIDs": {
+    "trae": true,
+    "cursor": false,
+    "vscode": false
+  }
+}

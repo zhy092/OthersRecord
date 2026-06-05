@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenClaw - 智能AI助手平台</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'claw-orange': '#FF6B35',
+            'deep-blue': '#1A365D',
+            'terracotta': '#D64045',
+            'soft-gray': '#F7F7F7',
+            'medium-gray': '#E2E8F0',
+            'dark-gray': '#4A5568',
+          },
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .transition-all-300 {
+        transition: all 0.3s ease;
+      }
+    }
+  </style>
+</head>
+<body class="font-inter bg-white text-deep-blue">
+  <!-- 导航栏 -->
+  <nav class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <div class="text-claw-orange text-3xl">
+          <i class="fa fa-paw"></i>
+        </div>
+        <span class="text-2xl font-semibold">OpenClaw</span>
+      </div>
+      
+      <!-- 桌面导航 -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#features" class="text-dark-gray hover:text-claw-orange transition-all-300">特性</a>
+        <a href="#products" class="text-dark-gray hover:text-claw-orange transition-all-300">产品</a>
+        <a href="#pricing" class="text-dark-gray hover:text-claw-orange transition-all-300">定价</a>
+        <a href="#contact" class="text-dark-gray hover:text-claw-orange transition-all-300">联系我们</a>
+        <button class="bg-claw-orange text-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-all-300">开始使用</button>
+      </div>
+      
+      <!-- 移动端菜单按钮 -->
+      <div class="md:hidden">
+        <button id="menu-toggle" class="text-deep-blue">
+          <i class="fa fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- 移动端导航菜单 -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+      <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+        <a href="#features" class="text-dark-gray hover:text-claw-orange transition-all-300 py-2">特性</a>
+        <a href="#products" class="text-dark-gray hover:text-claw-orange transition-all-300 py-2">产品</a>
+        <a href="#pricing" class="text-dark-gray hover:text-claw-orange transition-all-300 py-2">定价</a>
+        <a href="#contact" class="text-dark-gray hover:text-claw-orange transition-all-300 py-2">联系我们</a>
+        <button class="bg-claw-orange text-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-all-300 w-full">开始使用</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero 部分 -->
+  <section class="pt-32 pb-20 bg-soft-gray">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 mb-10 md:mb-0">
+          <h1 class="text-4xl md:text-5xl font-semibold mb-6 leading-tight">
+            智能AI助手<br>
+            <span class="text-claw-orange">赋能你的工作流程</span>
+          </h1>
+          <p class="text-lg text-dark-gray mb-8 leading-relaxed">
+            OpenClaw 提供强大的AI助手，帮助你自动化日常任务，提高工作效率，释放创造力。
+          </p>
+          <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+            <button class="bg-claw-orange text-white px-8 py-3 rounded-lg hover:bg-opacity-90 transition-all-300 text-lg font-medium">
+              立即开始
+            </button>
+            <button class="border border-claw-orange text-claw-orange px-8 py-3 rounded-lg hover:bg-claw-orange hover:bg-opacity-10 transition-all-300 text-lg font-medium">
+              了解更多
+            </button>
+          </div>
+        </div>
+        <div class="md:w-1/2">
+          <div class="bg-white rounded-2xl shadow-lg p-6">
+            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=AI%20assistant%20interface%20with%20chat%20interface%2C%20modern%20design%2C%20clean%20layout%2C%20professional%20looking&image_size=landscape_16_9" alt="OpenClaw AI Assistant" class="w-full rounded-xl">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 特性部分 -->
+  <section id="features" class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-semibold mb-4">强大的特性</h2>
+        <p class="text-lg text-dark-gray max-w-2xl mx-auto">
+          OpenClaw 提供一系列强大的特性，帮助你更智能、更高效地完成工作
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- 特性卡片 1 -->
+        <div class="bg-white rounded-xl shadow-md p-8 border border-medium-gray hover:shadow-lg transition-all-300">
+          <div class="text-claw-orange text-4xl mb-6">
+            <i class="fa fa-brain"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">智能对话</h3>
+          <p class="text-dark-gray">
+            与AI助手进行自然语言对话，获取准确的信息和建议，解决工作中的各种问题。
+          </p>
+        </div>
+        
+        <!-- 特性卡片 2 -->
+        <div class="bg-white rounded-xl shadow-md p-8 border border-medium-gray hover:shadow-lg transition-all-300">
+          <div class="text-claw-orange text-4xl mb-6">
+            <i class="fa fa-robot"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">任务自动化</h3>
+          <p class="text-dark-gray">
+            自动化重复性任务，如数据输入、文件整理、邮件回复等，节省时间和精力。
+          </p>
+        </div>
+        
+        <!-- 特性卡片 3 -->
+        <div class="bg-white rounded-xl shadow-md p-8 border border-medium-gray hover:shadow-lg transition-all-300">
+          <div class="text-claw-orange text-4xl mb-6">
+            <i class="fa fa-code"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">代码生成</h3>
+          <p class="text-dark-gray">
+            根据需求生成高质量的代码，支持多种编程语言，提高开发效率。
+          </p>
+        </div>
+        
+        <!-- 特性卡片 4 -->
+        <div class="bg-white rounded-xl shadow-md p-8 border border-medium-gray hover:shadow-lg transition-all-300">
+          <div class="text-claw-orange text-4xl mb-6">
+            <i class="fa fa-file-text"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">内容创作</h3>
+          <p class="text-dark-gray">
+            生成文章、报告、邮件等各种类型的内容，帮助你快速完成写作任务。
+          </p>
+        </div>
+        
+        <!-- 特性卡片 5 -->
+        <div class="bg-white rounded-xl shadow-md p-8 border border-medium-gray hover:shadow-lg transition-all-300">
+          <div class="text-claw-orange text-4xl mb-6">
+            <i class="fa fa-database"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">知识管理</h3>
+          <p class="text-dark-gray">
+            智能管理和检索知识库，快速找到所需信息，提高决策效率。
+          </p>
+        </div>
+        
+        <!-- 特性卡片 6 -->
+        <div class="bg-white rounded-xl shadow-md p-8 border border-medium-gray hover:shadow-lg transition-all-300">
+          <div class="text-claw-orange text-4xl mb-6">
+            <i class="fa fa-cogs"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">自定义集成</h3>
+          <p class="text-dark-gray">
+            与现有工具和系统集成，打造个性化的工作流程，提升整体效率。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 产品部分 -->
+  <section id="products" class="py-20 bg-soft-gray">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-semibold mb-4">我们的产品</h2>
+        <p class="text-lg text-dark-gray max-w-2xl mx-auto">
+          OpenClaw 提供多种产品，满足不同场景的需求
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <!-- 产品 1 -->
+        <div class="flex flex-col md:flex-row items-center bg-white rounded-xl shadow-md p-8 border border-medium-gray">
+          <div class="md:w-1/3 mb-6 md:mb-0">
+            <div class="text-claw-orange text-5xl">
+              <i class="fa fa-desktop"></i>
+            </div>
+          </div>
+          <div class="md:w-2/3 md:pl-8">
+            <h3 class="text-2xl font-semibold mb-4">OpenClaw Pro</h3>
+            <p class="text-dark-gray mb-6">
+              专业版AI助手，提供更强大的功能和更高的使用限额，适合企业和专业人士使用。
+            </p>
+            <button class="text-claw-orange hover:text-terracotta transition-all-300 font-medium">
+              了解详情 <i class="fa fa-arrow-right ml-2"></i>
+            </button>
+          </div>
+        </div>
+        
+        <!-- 产品 2 -->
+        <div class="flex flex-col md:flex-row items-center bg-white rounded-xl shadow-md p-8 border border-medium-gray">
+          <div class="md:w-1/3 mb-6 md:mb-0">
+            <div class="text-claw-orange text-5xl">
+              <i class="fa fa-mobile"></i>
+            </div>
+          </div>
+          <div class="md:w-2/3 md:pl-8">
+            <h3 class="text-2xl font-semibold mb-4">OpenClaw Mobile</h3>
+            <p class="text-dark-gray mb-6">
+              移动端AI助手，随时随地提供智能服务，让你在任何地方都能高效工作。
+            </p>
+            <button class="text-claw-orange hover:text-terracotta transition-all-300 font-medium">
+              了解详情 <i class="fa fa-arrow-right ml-2"></i>
+            </button>
+          </div>
+        </div>
+        
+        <!-- 产品 3 -->
+        <div class="flex flex-col md:flex-row items-center bg-white rounded-xl shadow-md p-8 border border-medium-gray">
+          <div class="md:w-1/3 mb-6 md:mb-0">
+            <div class="text-claw-orange text-5xl">
+              <i class="fa fa-server"></i>
+            </div>
+          </div>
+          <div class="md:w-2/3 md:pl-8">
+            <h3 class="text-2xl font-semibold mb-4">OpenClaw API</h3>
+            <p class="text-dark-gray mb-6">
+              开放API接口，让你将AI能力集成到自己的应用和系统中，打造个性化解决方案。
+            </p>
+            <button class="text-claw-orange hover:text-terracotta transition-all-300 font-medium">
+              了解详情 <i class="fa fa-arrow-right ml-2"></i>
+            </button>
+          </div>
+        </div>
+        
+        <!-- 产品 4 -->
+        <div class="flex flex-col md:flex-row items-center bg-white rounded-xl shadow-md p-8 border border-medium-gray">
+          <div class="md:w-1/3 mb-6 md:mb-0">
+            <div class="text-claw-orange text-5xl">
+              <i class="fa fa-users"></i>
+            </div>
+          </div>
+          <div class="md:w-2/3 md:pl-8">
+            <h3 class="text-2xl font-semibold mb-4">OpenClaw Team</h3>
+            <p class="text-dark-gray mb-6">
+              团队协作版AI助手，支持多人使用和共享知识库，提升团队整体效率。
+            </p>
+            <button class="text-claw-orange hover:text-terracotta transition-all-300 font-medium">
+              了解详情 <i class="fa fa-arrow-right ml-2"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 定价部分 -->
+  <section id="pricing" class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-semibold mb-4">简单透明的定价</h2>
+        <p class="text-lg text-dark-gray max-w-2xl mx-auto">
+          选择适合你需求的计划，开始使用 OpenClaw 的强大功能
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <!-- 基础版 -->
+        <div class="bg-white rounded-xl shadow-md p-8 border border-medium-gray hover:shadow-lg transition-all-300">
+          <div class="text-center mb-8">
+            <h3 class="text-xl font-semibold mb-2">基础版</h3>
+            <p class="text-dark-gray mb-4">适合个人用户</p>
+            <div class="text-3xl font-bold mb-2">¥99<span class="text-lg font-normal text-dark-gray">/月</span></div>
+          </div>
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-start">
+              <i class="fa fa-check text-claw-orange mt-1 mr-3"></i>
+              <span>500次AI对话</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-check text-claw-orange mt-1 mr-3"></i>
+              <span>100次代码生成</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-check text-claw-orange mt-1 mr-3"></i>
+              <span>5GB知识库存储</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-check text-claw-orange mt-1 mr-3"></i>
+              <span>基础API访问</span>
+            </li>
+            <li class="flex items-start text-dark-gray">
+              <i class="fa fa-times mt-1 mr-3"></i>
+              <span>高级功能</span>
+            </li>
+          </ul>
+          <button class="w-full border border-claw-orange text-claw-orange px-6 py-3 rounded-lg hover:bg-claw-orange hover:bg-opacity-10 transition-all-300 font-medium">
+            选择基础版
+          </button>
+        </div>
+        
+        <!-- 专业版 -->
+        <div class="bg-white rounded-xl shadow-lg p-8 border-2 border-claw-orange relative">
+          <div class="absolute top-0 right-0 bg-claw-orange text-white px-4 py-1 rounded-bl-lg font-medium">
+            推荐
+          </div>
+          <div class="text-center mb-8">
+            <h3 class="text-xl font-semibold mb-2">专业版</h3>
+            <p class="text-dark-gray mb-4">适合专业人士</p>
+            <div class="text-3xl font-bold mb-2">¥299<span class="text-lg font-normal text-dark-gray">/月</span></div>
+          </div>
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-start">
+              <i class="fa fa-check text-claw-orange mt-1 mr-3"></i>
+              <span>5000次AI对话</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-check text-claw-orange mt-1 mr-3"></i>
+              <span>1000次代码生成</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-check text-claw-orange mt-1 mr-3"></i>
+              <span>50GB知识库存储</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-check text-claw-orange mt-1 mr-3"></i>
+              <span>完整API访问</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-check text-claw-orange mt-1 mr-3"></i>
+              <span>高级功能</span>
+            </li>
+          </ul>
+          <button class="w-full bg-claw-orange text-white px-6 py-3 rounded-lg hover:bg-opacity-90 transition-all-300 font-medium">
+            选择专业版
+          </button>
+        </div>
+        
+        <!-- 企业版 -->
+        <div class="bg-white rounded-xl shadow-md p-8 border border-medium-gray hover:shadow-lg transition-all-300">
+          <div class="text-center mb-8">
+            <h3 class="text-xl font-semibold mb-2">企业版</h3>
+            <p class="text-dark-gray mb-4">适合企业团队</p>
+            <div class="text-3xl font-bold mb-2">¥999<span class="text-lg font-normal text-dark-gray">/月</span></div>
+          </div>
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-start">
+              <i class="fa fa-check text-claw-orange mt-1 mr-3"></i>
+              <span>无限AI对话</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-check text-claw-orange mt-1 mr-3"></i>
+              <span>无限代码生成</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-check text-claw-orange mt-1 mr-3"></i>
+              <span>500GB知识库存储</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-check text-claw-orange mt-1 mr-3"></i>
+              <span>企业级API访问</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-check text-claw-orange mt-1 mr-3"></i>
+              <span>所有高级功能</span>
+            </li>
+          </ul>
+          <button class="w-full border border-claw-orange text-claw-orange px-6 py-3 rounded-lg hover:bg-claw-orange hover:bg-opacity-10 transition-all-300 font-medium">
+            选择企业版
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系部分 -->
+  <section id="contact" class="py-20 bg-soft-gray">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-semibold mb-4">联系我们</h2>
+          <p class="text-lg text-dark-gray max-w-2xl mx-auto">
+            有任何问题或建议，欢迎随时联系我们
+          </p>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-md p-8 border border-medium-gray">
+          <form class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="name" class="block text-dark-gray mb-2 font-medium">姓名</label>
+                <input type="text" id="name" class="w-full px-4 py-3 border border-medium-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-claw-orange">
+              </div>
+              <div>
+                <label for="email" class="block text-dark-gray mb-2 font-medium">邮箱</label>
+                <input type="email" id="email" class="w-full px-4 py-3 border border-medium-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-claw-orange">
+              </div>
+            </div>
+            <div>
+              <label for="subject" class="block text-dark-gray mb-2 font-medium">主题</label>
+              <input type="text" id="subject" class="w-full px-4 py-3 border border-medium-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-claw-orange">
+            </div>
+            <div>
+              <label for="message" class="block text-dark-gray mb-2 font-medium">消息</label>
+              <textarea id="message" rows="5" class="w-full px-4 py-3 border border-medium-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-claw-orange"></textarea>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="bg-claw-orange text-white px-8 py-3 rounded-lg hover:bg-opacity-90 transition-all-300 text-lg font-medium">
+                发送消息
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="bg-deep-blue text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center space-x-2 mb-6">
+            <div class="text-claw-orange text-3xl">
+              <i class="fa fa-paw"></i>
+            </div>
+            <span class="text-2xl font-semibold">OpenClaw</span>
+          </div>
+          <p class="text-gray-300 mb-6">
+            智能AI助手平台，赋能你的工作流程，提高工作效率。
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-300 hover:text-claw-orange transition-all-300">
+              <i class="fa fa-twitter text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-300 hover:text-claw-orange transition-all-300">
+              <i class="fa fa-facebook text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-300 hover:text-claw-orange transition-all-300">
+              <i class="fa fa-linkedin text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-300 hover:text-claw-orange transition-all-300">
+              <i class="fa fa-github text-xl"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-6">产品</h4>
+          <ul class="space-y-4">
+            <li><a href="#" class="text-gray-300 hover:text-claw-orange transition-all-300">OpenClaw Pro</a></li>
+            <li><a href="#" class="text-gray-300 hover:text-claw-orange transition-all-300">OpenClaw Mobile</a></li>
+            <li><a href="#" class="text-gray-300 hover:text-claw-orange transition-all-300">OpenClaw API</a></li>
+            <li><a href="#" class="text-gray-300 hover:text-claw-orange transition-all-300">OpenClaw Team</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-6">资源</h4>
+          <ul class="space-y-4">
+            <li><a href="#" class="text-gray-300 hover:text-claw-orange transition-all-300">文档</a></li>
+            <li><a href="#" class="text-gray-300 hover:text-claw-orange transition-all-300">教程</a></li>
+            <li><a href="#" class="text-gray-300 hover:text-claw-orange transition-all-300">API参考</a></li>
+            <li><a href="#" class="text-gray-300 hover:text-claw-orange transition-all-300">常见问题</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-6">公司</h4>
+          <ul class="space-y-4">
+            <li><a href="#" class="text-gray-300 hover:text-claw-orange transition-all-300">关于我们</a></li>
+            <li><a href="#" class="text-gray-300 hover:text-claw-orange transition-all-300">博客</a></li>
+            <li><a href="#" class="text-gray-300 hover:text-claw-orange transition-all-300">招贤纳士</a></li>
+            <li><a href="#" class="text-gray-300 hover:text-claw-orange transition-all-300">联系我们</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-400 mb-4 md:mb-0">
+          © 2026 OpenClaw. 保留所有权利。
+        </p>
+        <div class="flex space-x-6">
+          <a href="#" class="text-gray-400 hover:text-claw-orange transition-all-300">隐私政策</a>
+          <a href="#" class="text-gray-400 hover:text-claw-orange transition-all-300">服务条款</a>
+          <a href="#" class="text-gray-400 hover:text-claw-orange transition-all-300">Cookie政策</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 移动端菜单切换
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+          // 关闭移动端菜单
+          document.getElementById('mobile-menu').classList.add('hidden');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

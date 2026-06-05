@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(lark auth *)",
+      "Bash(npm config *)",
+      "Bash(npx lark *)",
+      "Bash(lark-cli auth *)",
+      "Bash(lark-cli --help)",
+      "Bash(lark-cli calendar *)",
+      "Bash(lark-cli task *)",
+      "Bash(lark-cli docs *)",
+      "Bash(lark-cli im *)",
+      "Bash(lark-cli drive *)",
+      "Bash(lark-cli sheets *)",
+      "Bash(lark-cli mail *)",
+      "Bash(lark-cli minutes *)",
+      "Bash(lark-cli approval *)",
+      "Bash(lark-cli base *)",
+      "Bash(lark-cli attendance *)",
+      "Bash(lark-cli vc *)",
+      "Bash(lark-cli wiki *)",
+      "Bash(lark-cli contact *)",
+      "Bash(lark-cliokr --help)",
+      "Bash(lark-cli okr *)",
+      "Bash(lark-cli markdown *)",
+      "Bash(lark-cli whiteboard *)",
+      "Bash(lark-cli slides *)",
+      "Bash(python3 -c ' *)",
+      "Bash(claude mcp *)",
+      "Bash(git clone *)",
+      "Bash(git *)",
+      "WebFetch(domain:www.trae.ai)"
+    ]
+  }
+}

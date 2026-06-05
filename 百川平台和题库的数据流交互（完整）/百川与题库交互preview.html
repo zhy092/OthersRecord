@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>百川平台任务广场和PMP平台之间的数据流</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .chart-container {
+            margin-bottom: 50px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            padding: 20px;
+            background-color: #fafafa;
+        }
+        .chart-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            text-align: center;
+        }
+        .mermaid {
+            text-align: center;
+        }
+        .description {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f4f8;
+            border-left: 4px solid #3498db;
+            font-size: 14px;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>百川平台任务广场和PMP平台之间的数据流</h1>
+        
+        <div class="chart-container">
+            <div class="chart-title">流程图</div>
+            <div class="mermaid">
+flowchart TD
+    Start([开始]) --> A[PMP平台任务工单管理v25<br/>搜索 状态=待领取 & 任务类型=硬件试题结构化]
+    A --> B[指派任务到指定的uid用户<br/>（uid为百川平台的用户uid）]
+    
+    B --> C{强制转移到指定用户?}
+    
+    C -- 否 --> D[百川平台->任务广场->硬件试题结构化-开始任务<br/>（即：领取任务）]
+    D --> E[编辑题目并提交]
+    
+    C -- 是 --> F[百川平台->我的工作台->我的任务->待完成任务->开始任务]
+    F --> E
+    
+    E --> G[PMP平台任务工单管理v25<br/>搜索 状态=待领取 & 任务类型=硬件试题结构化审核]
+    G --> H[通过用户uid指派给指定的用户]
+    
+    H --> I{强制转移到指定用户?}
+    
+    I -- 否 --> J[百川平台->任务广场->硬件试题结构化审核（即：一审）<br/>-开始任务（即：领取任务）]
+    I -- 是 --> K[百川平台->我的工作台->我的任务->待完成任务->开始任务]
+    
+    J --> L[审核题目]
+    K --> L
+    
+    L --> M{一审是否通过?}
+    
+    M -- 是 --> N[进入内审环节]
+    N --> O[PMP平台->内审质检->通用内审<br/>结合提交日期+任务类型=硬件试题结构化审核搜索条件找到内审记录]
+    O --> P[查看详情页面查看题目的提交记录、对题目进行内审操作]
+    P --> Q{内审结果?}
+    Q -- 通过 --> R([内审通过])
+    Q -- 驳回 --> S([内审驳回])
+    
+    M -- 否 --> T[题目回到硬件试题结构化的任务池中<br/>等待任务再次分配]
+    T --> A
+            </div>
+            <div class="description">
+                <strong>说明：</strong>流程图展示了从PMP平台搜索待领取任务开始，经过任务指派、用户编辑提交、审核任务、一审和内审的完整流程，包括不同条件下的分支路径。
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <div class="chart-title">状态图</div>
+            <div class="mermaid">
+stateDiagram-v2
+    [*] --> PMP搜索待领取任务
+    
+    state "PMP平台任务工单管理v25<br/>搜索 状态=待领取 & 任务类型=硬件试题结构化" as PMP搜索待领取任务
+    state "任务已指派给指定用户" as 任务已指派
+    state "百川平台->任务广场->硬件试题结构化-开始任务" as 百川广场领取任务
+    state "百川平台->我的工作台->我的任务->待完成任务->开始任务" as 百川工作台领取任务
+    state "编辑题目并提交" as 编辑提交
+    state "PMP平台任务工单管理v25<br/>搜索 状态=待领取 & 任务类型=硬件试题结构化审核" as PMP搜索审核任务
+    state "审核任务已指派给指定用户" as 审核任务已指派
+    state "百川平台->任务广场->硬件试题结构化审核（即：一审）<br/>-开始任务" as 百川广场审核任务
+    state "百川平台->我的工作台->我的任务->待完成任务->开始任务" as 百川工作台审核任务
+    state "审核题目" as 审核题目
+    state "一审通过" as 一审通过
+    state "一审不通过" as 一审不通过
+    state "PMP平台->内审质检->通用内审" as 内审质检
+    state "内审通过" as 内审通过
+    state "内审驳回" as 内审驳回
+    
+    PMP搜索待领取任务 --> 任务已指派 : 指派任务到指定的uid用户
+    
+    任务已指派 --> 百川广场领取任务 : 强制转移到指定用户=否
+    任务已指派 --> 百川工作台领取任务 : 强制转移到指定用户=是
+    
+    百川广场领取任务 --> 编辑提交
+    百川工作台领取任务 --> 编辑提交
+    
+    编辑提交 --> PMP搜索审核任务 : 题目提交
+    
+    PMP搜索审核任务 --> 审核任务已指派 : 通过用户uid指派给指定的用户
+    
+    审核任务已指派 --> 百川广场审核任务 : 强制转移到指定用户=否
+    审核任务已指派 --> 百川工作台审核任务 : 强制转移到指定用户=是
+    
+    百川广场审核任务 --> 审核题目
+    百川工作台审核任务 --> 审核题目
+    
+    审核题目 --> 一审通过 : 一审通过
+    审核题目 --> 一审不通过 : 一审不通过
+    
+    一审通过 --> 内审质检 : 进入内审环节
+    一审不通过 --> PMP搜索待领取任务 : 题目回到硬件试题结构化的任务池中
+    
+    内审质检 --> 内审通过 : 内审通过
+    内审质检 --> 内审驳回 : 内审驳回
+    
+    内审通过 --> [*]
+    内审驳回 --> [*]
+            </div>
+            <div class="description">
+                <strong>说明：</strong>状态图展示了各个状态之间的转换关系，包括任务从待领取到指派、编辑提交、审核、一审和内审的状态变化。
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <div class="chart-title">时序图</div>
+            <div class="mermaid">
+sequenceDiagram
+    participant PMP as PMP平台（题库）
+    participant User as 用户
+    participant Baichuan as 百川平台
+    
+    %% 步骤1：PMP平台搜索待领取任务
+    PMP->>PMP: 任务工单管理v25搜索<br/>状态=待领取 & 任务类型=硬件试题结构化
+    
+    %% 步骤2：指派任务到指定用户
+    PMP->>User: 指派任务到指定的uid用户<br/>（uid为百川平台的用户uid）
+    
+    %% 步骤3：用户编辑题目并提交（两种情况）
+    alt 强制转移到指定用户=否
+        User->>Baichuan: 任务广场->硬件试题结构化-开始任务<br/>（即：领取任务）
+        User->>Baichuan: 编辑题目并提交
+    else 强制转移到指定用户=是
+        User->>Baichuan: 我的工作台->我的任务->待完成任务->开始任务
+        User->>Baichuan: 编辑题目并提交
+    end
+    
+    %% 步骤4：提交后，PMP平台搜索待领取的审核任务
+    Baichuan->>PMP: 题目提交
+    PMP->>PMP: 任务工单管理v25搜索<br/>状态=待领取 & 任务类型=硬件试题结构化审核
+    PMP->>User: 通过用户uid指派给指定的用户
+    
+    %% 步骤5：审核任务（一审）
+    alt 强制转移到指定用户=否
+        User->>Baichuan: 任务广场->硬件试题结构化审核（即：一审）<br/>-开始任务（即：领取任务）
+    else 强制转移到指定用户=是
+        User->>Baichuan: 我的工作台->我的任务->待完成任务->开始任务
+    end
+    User->>Baichuan: 审核题目
+    
+    %% 步骤5.1：一审结果
+    alt 一审通过
+        Baichuan->>PMP: 一审通过，进入内审环节
+        %% 步骤6：内审质检
+        PMP->>PMP: 内审质检->通用内审<br/>结合提交日期+任务类型=硬件试题结构化审核搜索条件找到内审记录
+        PMP->>PMP: 查看详情页面查看题目的提交记录
+        
+        alt 内审通过
+            PMP->>PMP: 内审通过
+        else 内审驳回
+            PMP->>PMP: 内审驳回
+        end
+    else 一审不通过
+        Baichuan->>PMP: 一审不通过
+        PMP->>PMP: 题目回到硬件试题结构化的任务池中<br/>等待任务再次分配
+        PMP->>User: 重新指派任务
+    end
+            </div>
+            <div class="description">
+                <strong>说明：</strong>时序图展示了PMP平台、用户和百川平台之间的交互顺序和时间关系，包括不同条件下的交互流程。
+            </div>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#f0f9ff',
+                primaryTextColor: '#333',
+                primaryBorderColor: '#3498db',
+                lineColor: '#3498db',
+                secondaryColor: '#ffffff',
+                tertiaryColor: '#fafafa'
+            }
+        });
+    </script>
+</body>
+</html>

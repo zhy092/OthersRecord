@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>百川平台任务广场和PMP平台之间的数据流 - 图表预览</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .chart-container {
+            margin-bottom: 50px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            padding: 20px;
+            background-color: #fafafa;
+        }
+        .chart-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            text-align: center;
+        }
+        .mermaid {
+            text-align: center;
+        }
+        .description {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f4f8;
+            border-left: 4px solid #3498db;
+            font-size: 14px;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>百川平台任务广场和PMP平台之间的数据流</h1>
+        
+        <div class="chart-container">
+            <div class="chart-title">时序图</div>
+            <div class="mermaid">
+sequenceDiagram
+    
+    participant User as 用户
+    participant Baichuan as 百川平台任务广场
+    participant PMP_Task as PMP平台-任务工单管理v25
+    participant PMP_Review1 as PMP平台-任务审核(一审)
+    participant PMP_Internal as PMP平台-内审质检
+    
+    %% 流程1：百川广场领取任务 -> PMP任务工单管理 -> 分配用户 -> 一审 -> 内审
+    User->>Baichuan: 领取任务(硬件试题结构化)
+    User->>Baichuan: 编辑题目并提交
+    Baichuan->>PMP_Task: 创建任务(状态=待领取)
+    PMP_Task->>PMP_Task: 搜索状态=待领取的任务
+    User->>PMP_Task: 通过【指派】按钮分配任务(指定用户uid)
+    PMP_Task->>PMP_Review1: 分配指定用户后，任务进入一审
+    User->>PMP_Review1: 任务审核(硬件试题结构化审核)
+    alt 一审审核通过
+        PMP_Review1->>PMP_Internal: 进入内审
+        User->>PMP_Internal: 内审(题库-内审质检-通用内审)
+    else 一审审核不通过
+        PMP_Review1->>Baichuan: 重新回到广场任务(硬件试题结构化 任务中)
+    end
+    
+    %% 流程2：百川广场领取任务 -> 一审 -> 内审
+    User->>Baichuan: 领取任务(硬件试题结构化)
+    User->>Baichuan: 编辑题目并提交
+    Baichuan->>PMP_Review1: 直接进入一审
+    User->>PMP_Review1: 任务审核(硬件试题结构化审核)
+    alt 一审审核通过
+        PMP_Review1->>PMP_Internal: 进入内审
+        User->>PMP_Internal: 内审(题库-内审质检-通用内审)
+        alt 内审审核通过
+            PMP_Internal->>PMP_Internal: 审核通过
+        else 内审审核驳回
+            PMP_Internal->>PMP_Internal: 审核驳回
+        end
+    else 一审审核不通过
+        PMP_Review1->>Baichuan: 重新回到广场任务(硬件试题结构化 任务中)
+    end
+            </div>
+            <div class="description">
+                <strong>说明：</strong>时序图展示了不同参与者（用户、百川平台任务广场、PMP平台各模块）之间的交互顺序和时间关系。包含两种不同的任务流程：通过任务工单管理分配的流程和直接进入一审的流程。
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <div class="chart-title">流程图</div>
+            <div class="mermaid">
+flowchart TD
+    
+    Start([开始]) --> A[用户在百川广场领取任务<br/>硬件试题结构化]
+    A --> B[用户编辑题目并提交]
+    
+    B --> C{是否通过任务工单管理分配?}
+    C -- 是 --> D[任务进入PMP平台<br/>「任务工单管理v25」<br/>状态=待领取]
+    D --> E[搜索状态=待领取的任务]
+    E --> F[通过【指派】按钮分配任务<br/>指定用户uid]
+    F --> G[分配指定用户后]
+    G --> H[任务进入「任务审核」<br/>硬件试题结构化审核<br/>一审]
+    
+    C -- 否 --> H
+    
+    H --> I{一审审核是否通过?}
+    I -- 是 --> J[进入内审]
+    J --> K[内审<br/>题库-内审质检-通用内审]
+    K --> L{内审审核是否通过?}
+    L -- 是 --> M[内审审核通过]
+    L -- 否 --> N[内审审核驳回]
+    
+    I -- 否 --> O[重新回到广场任务<br/>硬件试题结构化 任务中]
+    O --> A
+    A --> B
+    B --> H
+    H --> I
+    
+    I -- 是 --> J
+    J --> K
+    K --> L
+    
+    M --> End([结束])
+    N --> End
+            </div>
+            <div class="description">
+                <strong>说明：</strong>流程图展示了任务从开始到结束的完整处理流程，包含决策点（如一审是否通过、内审是否通过等）和不同情况下的流转路径，包括审核不通过后重新回到广场任务的循环。
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <div class="chart-title">状态机</div>
+            <div class="mermaid">
+stateDiagram-v2
+    
+    [*] --> 百川广场任务领取
+    
+    state "百川广场任务领取<br/>硬件试题结构化" as baichuan_task
+    state "PMP任务工单管理<br/>状态=待领取" as pmp_task_pending
+    state "PMP任务工单管理<br/>已分配用户" as pmp_task_assigned
+    state "任务审核<br/>硬件试题结构化审核<br/>一审" as first_review
+    state "内审<br/>题库-内审质检-通用内审" as internal_review
+    state "审核通过" as approved
+    state "审核驳回" as rejected
+    state "广场任务中<br/>硬件试题结构化" as baichuan_in_progress
+    
+    baichuan_task --> pmp_task_pending : 提交任务<br/>可选路径
+    baichuan_task --> first_review : 直接提交<br/>默认路径
+    
+    pmp_task_pending --> pmp_task_assigned : 指派任务<br/>指定用户uid
+    pmp_task_assigned --> first_review : 分配完成
+    
+    first_review --> internal_review : 一审通过
+    first_review --> baichuan_in_progress : 一审不通过
+    
+    internal_review --> approved : 内审通过
+    internal_review --> rejected : 内审驳回
+    
+    baichuan_in_progress --> first_review : 重新提交
+    
+    approved --> [*]
+    rejected --> [*]
+            </div>
+            <div class="description">
+                <strong>说明：</strong>状态机展示了任务在不同状态之间的转换关系，包含所有可能的状态（如百川广场任务领取、PMP任务工单管理、一审、内审等）和状态转换的条件与方向。
+            </div>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#f0f9ff',
+                primaryTextColor: '#333',
+                primaryBorderColor: '#3498db',
+                lineColor: '#3498db',
+                secondaryColor: '#ffffff',
+                tertiaryColor: '#fafafa'
+            }
+        });
+    </script>
+</body>
+</html>

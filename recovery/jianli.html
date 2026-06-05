@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>李志培 - 高级Android研发工程师简历</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .resume-container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Header */
+        .header {
+            background: #2c3e50;
+            color: #fff;
+            padding: 35px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left h1 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+
+        .header-left .title {
+            font-size: 16px;
+            color: #3498db;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .header-info {
+            font-size: 13px;
+            color: #bdc3c7;
+            line-height: 1.8;
+        }
+
+        .header-info span {
+            margin-right: 15px;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .header-right .highlight {
+            background: #3498db;
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        /* Sections */
+        .section {
+            padding: 25px 40px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 18px;
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 18px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+            display: inline-block;
+        }
+
+        /* Personal Advantages */
+        .advantage-list {
+            list-style: none;
+        }
+
+        .advantage-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #444;
+            line-height: 1.7;
+        }
+
+        .advantage-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        .advantage-list li strong {
+            color: #2c3e50;
+        }
+
+        /* Tech Stack */
+        .tech-list {
+            list-style: none;
+        }
+
+        .tech-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #444;
+            line-height: 1.7;
+        }
+
+        .tech-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        .tech-list li strong {
+            color: #2c3e50;
+        }
+
+        /* Work Experience */
+        .job {
+            margin-bottom: 28px;
+        }
+
+        .job:last-child {
+            margin-bottom: 0;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 10px;
+        }
+
+        .job-company {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .job-title {
+            font-size: 14px;
+            color: #3498db;
+            margin-left: 10px;
+        }
+
+        .job-date {
+            font-size: 13px;
+            color: #7f8c8d;
+        }
+
+        .job-section {
+            margin-bottom: 10px;
+        }
+
+        .job-section-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 6px;
+        }
+
+        .job-list {
+            list-style: none;
+            padding-left: 15px;
+        }
+
+        .job-list li {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 5px;
+            position: relative;
+            padding-left: 12px;
+            line-height: 1.6;
+        }
+
+        .job-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #3498db;
+        }
+
+        /* Projects */
+        .project {
+            margin-bottom: 24px;
+        }
+
+        .project:last-child {
+            margin-bottom: 0;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 10px;
+        }
+
+        .project-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .project-role {
+            font-size: 13px;
+            color: #3498db;
+            margin-left: 8px;
+        }
+
+        .project-date {
+            font-size: 13px;
+            color: #7f8c8d;
+        }
+
+        .project-desc {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .project-tech {
+            font-size: 12px;
+            color: #888;
+            background: #f8f9fa;
+            padding: 6px 10px;
+            border-radius: 3px;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        /* Education */
+        .edu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .edu-school {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .edu-detail {
+            font-size: 13px;
+            color: #666;
+            margin-left: 10px;
+        }
+
+        .edu-date {
+            font-size: 13px;
+            color: #7f8c8d;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: #fff;
+            }
+            .resume-container {
+                box-shadow: none;
+                margin: 0;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="resume-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <h1>李志培</h1>
+                <div class="title">高级Android研发工程师 / 技术负责人</div>
+                <div class="header-info">
+                    <span>男 | 32岁</span>
+                    <span>📱 18876305637</span>
+                    <span>✉️ 949262096@qq.com</span><br>
+                    <span>10年Android研发经验</span>
+                    <span>期望薪资：15-17K</span>
+                    <span>期望城市：厦门</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="highlight">10年架构深耕</div>
+                <div class="highlight">车载/IoT/医疗</div>
+            </div>
+        </div>
+
+        <!-- Personal Advantages -->
+        <div class="section">
+            <div class="section-title">个人优势</div>
+            <ul class="advantage-list">
+                <li><strong>十年架构深耕：</strong>10年Android平台开发与架构经验，精通移动端全生命周期管理。擅长MVVM架构设计、AIDL跨进程通信、复杂UI性能调优及内存管理。</li>
+                <li><strong>车载系统经验：</strong>熟悉车载Android应用开发，具备多车型平台适配（高通SA8155/SA8295）、核心功能模块架构设计及系统级组件优化经验。</li>
+                <li><strong>全栈技术视野：</strong>具备前后端一体化开发能力，独立负责过后端接口设计（.NET）与前端功能开发，熟悉RESTful API、WebSocket及网络层优化。</li>
+                <li><strong>IoT/医疗硬件融合：</strong>主导制定Android端与下位机的蓝牙BLE/串口通信协议，具备C语言底层协作能力，完整输出医疗器械注册技术文档。</li>
+                <li><strong>AI工具赋能：</strong>熟练使用Cursor、Claude Code等AI编程工具辅助开发，提升代码质量与研发效率。</li>
+            </ul>
+        </div>
+
+        <!-- Tech Stack -->
+        <div class="section">
+            <div class="section-title">技术栈</div>
+            <ul class="tech-list">
+                <li><strong>编程语言：</strong>Java（精通）、Kotlin（熟练）、C（基础）、JavaScript/HTML/CSS（基础）</li>
+                <li><strong>架构模式：</strong>MVVM、MVP、MVC、AIDL跨进程通信、Jetpack组件（ViewModel、Room、Flow）</li>
+                <li><strong>网络通信：</strong>OkHttp、Retrofit、WebSocket、RESTful API设计</li>
+                <li><strong>UI/性能：</strong>自定义View、ConstraintLayout、RecyclerView优化、内存泄漏排查、启动速度优化</li>
+                <li><strong>车载/IoT：</strong>车载多屏适配、蓝牙BLE、串口通信、医疗设备协议、硬件联调</li>
+                <li><strong>第三方SDK：</strong>高德地图、小米/极光推送、OA流程、即时通讯、文件上传下载</li>
+                <li><strong>工具/其他：</strong>Git/SVN、.NET后端开发、医疗器械注册文档编写、Cursor/Claude Code AI编程工具</li>
+            </ul>
+        </div>
+
+        <!-- Work Experience -->
+        <div class="section">
+            <div class="section-title">工作经历</div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <span class="job-company">南京中科创达软件科技有限公司</span>
+                        <span class="job-title">Android高级开发工程师</span>
+                    </div>
+                    <span class="job-date">2025.07 - 至今</span>
+                </div>
+                <div class="job-section">
+                    <div class="job-section-title">职责：</div>
+                    <ul class="job-list">
+                        <li>负责车载系统多车型适配功能模块的设计与开发</li>
+                        <li>主导平台化架构升级，推进技术变更落地与现有模块维护迭代</li>
+                    </ul>
+                </div>
+                <div class="job-section">
+                    <div class="job-section-title">业绩：</div>
+                    <ul class="job-list">
+                        <li>独立完成一镜到底、涂装功能等多平台适配模块开发</li>
+                        <li>搭建基于MVVM的模块化框架，提升代码复用率与可维护性</li>
+                        <li>运用AIDL实现多进程通信架构，保障系统稳定性</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <span class="job-company">安邦（厦门）生物科技有限公司</span>
+                        <span class="job-title">Android技术负责人</span>
+                    </div>
+                    <span class="job-date">2024.01 - 2025.05</span>
+                </div>
+                <div class="job-section">
+                    <div class="job-section-title">职责：</div>
+                    <ul class="job-list">
+                        <li>统筹医疗检测类App全流程研发，主导硬件设备形态与软件交互设计</li>
+                        <li>制定开发计划并推进执行，负责与下位机的协议制定及联调</li>
+                        <li>主导功能验收、注册文档输出及后续迭代维护</li>
+                    </ul>
+                </div>
+                <div class="job-section">
+                    <div class="job-section-title">业绩：</div>
+                    <ul class="job-list">
+                        <li>带队完成2款医疗App上线，1款在研；搭建独立内部测试环境</li>
+                        <li>完成全套医疗器械注册技术文档输出</li>
+                        <li>突破硬件联调技术壁垒，独立制定下位机通信协议，拓展C语言嵌入式开发能力</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <span class="job-company">厦门图魅软件技术有限公司</span>
+                        <span class="job-title">Android开发工程师 → 技术骨干</span>
+                    </div>
+                    <span class="job-date">2016.07 - 2023.10</span>
+                </div>
+                <div class="job-section">
+                    <div class="job-section-title">职责：</div>
+                    <ul class="job-list">
+                        <li>参与项目需求评审与技术可行性评估，独立完成App全栈开发</li>
+                        <li>负责后端接口设计、前端功能实现及UI交互优化</li>
+                        <li>使用SVN进行代码版本管理与团队协作</li>
+                    </ul>
+                </div>
+                <div class="job-section">
+                    <div class="job-section-title">业绩：</div>
+                    <ul class="job-list">
+                        <li>独立承担公司核心App的完整开发与上线，保障长期稳定运行</li>
+                        <li>独立完成后端业务功能设计与实现，实现前后端一体化交付</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Experience -->
+        <div class="section">
+            <div class="section-title">项目经历</div>
+
+            <div class="project">
+                <div class="project-header">
+                    <div>
+                        <span class="project-name">大健康居家检测平台</span>
+                        <span class="project-role">技术负责人</span>
+                    </div>
+                    <span class="project-date">2024.01 - 2025.05</span>
+                </div>
+                <div class="project-desc">
+                    面向家庭医疗场景的检测服务平台，集成蓝牙设备连接、健康档案管理、大数据分析、电商商城等模块。
+                </div>
+                <div class="project-tech">技术栈：蓝牙BLE、MVVM、医疗协议、硬件联调</div>
+                <div class="job-section">
+                    <div class="job-section-title">核心业绩：</div>
+                    <ul class="job-list">
+                        <li>主导产品形态设计、技术方案选型及开发计划制定，负责与外包团队的技术对接与进度管控</li>
+                        <li>兼任二合一检测设备嵌入式软件开发，独立完成下位机通信协议设计与对接</li>
+                        <li>交付2款上线App，参与3款仪器硬件研发及配套软件开发，输出完整医疗器械注册技术文档包</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <div>
+                        <span class="project-name">单兵营维系统</span>
+                        <span class="project-role">核心研发</span>
+                    </div>
+                    <span class="project-date">2022.08 - 2023.10</span>
+                </div>
+                <div class="project-desc">
+                    基于GIS实现资源管理、工单处理、设备维护及报表统计等功能。
+                </div>
+                <div class="project-tech">技术栈：GIS地图、TableLayout、SpannableStringBuilder、CalendarView</div>
+                <div class="job-section">
+                    <div class="job-section-title">技术亮点：</div>
+                    <ul class="job-list">
+                        <li>使用TableLayout实现复杂表格统计展示</li>
+                        <li>运用SpannableStringBuilder实现关键词高亮与智能提醒</li>
+                        <li>基于CalendarView开发日期维度统计报表</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <div>
+                        <span class="project-name">OCM智慧资源管理系统</span>
+                        <span class="project-role">核心研发</span>
+                    </div>
+                    <span class="project-date">2018.01 - 2023.10</span>
+                </div>
+                <div class="project-desc">
+                    资源设备管理、任务流程执行、资源调配及公告提醒功能开发。
+                </div>
+                <div class="project-tech">技术栈：GIS、OA流程、扫码定位、逆向移植、.NET接口</div>
+                <div class="job-section">
+                    <div class="job-section-title">技术亮点：</div>
+                    <ul class="job-list">
+                        <li>集成OA系统实现移动端与Web端流程互通</li>
+                        <li>调用摄像头实现二维码资源绑定与扫码定位</li>
+                        <li>逆向移植BS端功能模块至移动端，优化查询算法显著提升接口数据响应速度</li>
+                        <li>掌握.NET后端接口开发，实现前后端独立联调</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <div>
+                        <span class="project-name">GIS综合资源管理系统</span>
+                        <span class="project-role">核心研发</span>
+                    </div>
+                    <span class="project-date">2016.07 - 2023.10</span>
+                </div>
+                <div class="project-desc">
+                    资源管理系统全模块开发，涵盖地图集成、网络通信、推送服务及文件管理。
+                </div>
+                <div class="project-tech">技术栈：高德地图、OkHttp、小米推送、文件上传下载</div>
+                <div class="job-section">
+                    <div class="job-section-title">技术亮点：</div>
+                    <ul class="job-list">
+                        <li>集成高德地图实现GIS资源可视化，使用OkHttp重构网络层保障请求稳定性</li>
+                        <li>优化ListView加载性能，解决GridView滑动冲突</li>
+                        <li>集成小米推送服务实现消息触达，熟练运用Android四大组件与Handle线程通信机制</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Education -->
+        <div class="section">
+            <div class="section-title">教育经历</div>
+            <div class="edu-item">
+                <div>
+                    <span class="edu-school">厦门大学嘉庚学院</span>
+                    <span class="edu-detail">本科 | 软件工程</span>
+                </div>
+                <span class="edu-date">2012.09 - 2016.06</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

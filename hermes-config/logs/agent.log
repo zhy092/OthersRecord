@@ -1,0 +1,10 @@
+2026-04-20 15:44:39,973 INFO run_agent: Loaded environment variables from /Users/zyb/Documents/project/OthersRecord/hermes-config/.env
+2026-04-20 15:44:42,902 INFO tools.tirith_security: tirith not found — downloading latest release for aarch64-apple-darwin...
+2026-04-20 15:44:47,102 INFO tools.tirith_security: cosign not on PATH — installing tirith with SHA-256 verification only (install cosign for full supply chain verification)
+2026-04-20 15:44:47,147 INFO tools.tirith_security: tirith installed to /Users/zyb/Documents/project/OthersRecord/hermes-config/bin/tirith (SHA-256 only)
+2026-04-20 15:45:14,158 INFO agent.auxiliary_client: Auxiliary auto-detect: using main provider anthropic (claude-opus-4-6)
+2026-04-20 15:45:16,229 INFO [20260420_154441_89b75a] agent.credential_pool: credential pool: marking ANTHROPIC_API_KEY exhausted (status=401), rotating
+2026-04-20 15:45:16,229 INFO [20260420_154441_89b75a] agent.credential_pool: credential pool: no available entries (all exhausted or empty)
+2026-04-20 15:45:16,231 ERROR [20260420_154441_89b75a] root: Non-retryable client error: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CaEehn3fD1DC6spwWntvE'}
+2026-04-20 17:25:40,382 INFO hermes_cli.web_server: Mounted plugin API routes: /api/plugins/example/
+2026-04-20 17:30:31,550 INFO hermes_cli.web_server: Mounted plugin API routes: /api/plugins/example/

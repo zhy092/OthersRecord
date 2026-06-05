@@ -1,0 +1,29 @@
+default_model = "deepseek-flash"
+
+[agent]
+auto_plan = "ask"
+
+[[providers]]
+name = "deepseek-flash"
+kind = "openai"
+base_url = "https://api.deepseek.com"
+model = "deepseek-v4-flash"
+api_key_env = "DEEPSEEK_API_KEY"
+
+[[providers]]
+name = "deepseek-pro"
+kind = "openai"
+base_url = "https://api.deepseek.com"
+model = "deepseek-chat"
+api_key_env = "DEEPSEEK_API_KEY"
+
+[tools]
+enabled = []
+
+[permissions]
+mode = "ask"
+deny = ["bash(rm -rf*)", "bash(git push*)"]
+allow = ["bash(go test*)"]
+
+[sandbox]
+workspace_root = ""
