@@ -10,3 +10,9 @@
 [submodule "hermes-config/skills/planning-with-files"]
 	path = hermes-config/skills/planning-with-files
 	url = https://github.com/OthmanAdi/planning-with-files
+[submodule "hermes-config/skills/superpowers"]
+	path = hermes-config/skills/superpowers
+	url = https://github.com/obra/superpowers
+[submodule "hermes-config/skills/ui-ux-pro-max-skill"]
+	path = hermes-config/skills/ui-ux-pro-max-skill
+	url = https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
