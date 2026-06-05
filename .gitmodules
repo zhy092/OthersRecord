@@ -4,3 +4,6 @@
 [submodule ".trae/skills/ui-ux-pro-max-skill"]
 	path = .trae/skills/ui-ux-pro-max-skill
 	url = https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
+[submodule ".trae/skills/planning-with-files"]
+	path = .trae/skills/planning-with-files
+	url = https://github.com/OthmanAdi/planning-with-files
